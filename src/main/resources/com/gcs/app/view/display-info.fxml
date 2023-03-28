@@ -9,18 +9,17 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-
-<AnchorPane id="displayPane" prefHeight="500.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="displayPane" fx:id="parentAnchorPane" prefHeight="500.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gcs.app.view.DisplayController">
     <children>
-        <SplitPane dividerPositions="0.1" orientation="VERTICAL" prefHeight="500.0" prefWidth="674.0">
+        <SplitPane fx:id="parentSplitPane" dividerPositions="0.1" orientation="VERTICAL" prefHeight="500.0" prefWidth="674.0">
             <items>
-                <Label prefHeight="18.0" prefWidth="212.0" text="Properties" textAlignment="CENTER" />
-                <ScrollPane prefHeight="58.0" prefWidth="285.0">
+                <Label fx:id="headingLabel" prefHeight="18.0" prefWidth="212.0" text="Properties" textAlignment="CENTER" />
+                <ScrollPane fx:id="scrollPane" prefHeight="58.0" prefWidth="285.0">
                     <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </padding>
                     <content>
-                        <VBox prefHeight="371.0" prefWidth="397.0" spacing="3.0">
+                        <VBox fx:id="displayBox" prefHeight="371.0" prefWidth="397.0" spacing="3.0">
                             <children>
                                 <TextFlow style="-fx-background-color: e5e5e5; -fx-background-radius: 5;">
                                     <children>
