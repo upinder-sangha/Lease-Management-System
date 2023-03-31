@@ -1,24 +1,23 @@
 package com.gcs.app.tasks;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
 import com.gcs.app.contoller.TenantController;
 import com.gcs.app.model.Tenant;
 import com.gcs.app.view.RentAUnitController;
-
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-public class DisplayTabTask extends Task<ArrayList<Button>>{
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
-	private String operation;
+public class DisplayDynamicButtonsTask extends Task<ArrayList<Button>>{
 
-	public DisplayTabTask(String operation) {
-		this.operation = operation;
+	private String currentTab;
+
+	public DisplayDynamicButtonsTask(String currentTab) {
+		this.currentTab = currentTab;
 	}
 
 	@Override
@@ -29,7 +28,7 @@ public class DisplayTabTask extends Task<ArrayList<Button>>{
 //		Text text;
 //		TextFlow textFlow;
 
-		if ("displayTenantsTab".equalsIgnoreCase(operation)) {
+		if ("displayTenantsTab".equalsIgnoreCase(currentTab)) {
 			HashMap<String, Tenant> tenants = TenantController.getTenants();
 			for (Entry<String, Tenant> tenant : tenants.entrySet()) {
 				//Button button = new Button(tenant.getValue().getName()+" ("+tenant.getValue().getPhoneNumber()+")");

@@ -2,17 +2,14 @@ package com.gcs.app.view;
 
 import java.util.ArrayList;
 
-import com.gcs.app.tasks.DisplayTabTask;
-import com.gcs.app.tasks.DisplayTask;
+import com.gcs.app.tasks.DisplayDynamicButtonsTask;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class RentAUnitController {
@@ -40,8 +37,8 @@ public class RentAUnitController {
 	}
 	
 	private void displayTab(String operation) {
-		DisplayTabTask displayTabTask = new DisplayTabTask(operation);
-		displayTabTask.valueProperty().addListener(new ChangeListener<ArrayList<Button>>() {
+		DisplayDynamicButtonsTask displayDynamicButtonsTask = new DisplayDynamicButtonsTask(operation);
+		displayDynamicButtonsTask.valueProperty().addListener(new ChangeListener<ArrayList<Button>>() {
 
 			@Override
 			public void changed(ObservableValue<? extends ArrayList<Button>> observable, ArrayList<Button> oldValue, ArrayList<Button> newValue) {
@@ -49,7 +46,7 @@ public class RentAUnitController {
 			}
 		});
 		
-		Thread displayThread = new Thread(displayTabTask);
+		Thread displayThread = new Thread(displayDynamicButtonsTask);
 		displayThread.setDaemon(true);
 		displayThread.start();
 	}
