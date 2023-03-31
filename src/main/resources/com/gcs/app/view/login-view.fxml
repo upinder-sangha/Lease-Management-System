@@ -8,10 +8,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gcs.app.view.LoginController">
    <children>
-      <Button fx:id="loginButton" layoutX="263.0" layoutY="274.0" mnemonicParsing="false" onAction="#onLoginBtnClick" text="Login" />
+      <Label fx:id="loginLabel" layoutX="271.0" layoutY="39.0" text="Login" />
+      <TextField fx:id="usernameField" layoutX="210.0" layoutY="100.0" />
       <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="200.0" />
-      <TextField fx:id="usernameField" layoutX="210.0" layoutY="119.0" />
-      <Label fx:id="loginLabel" layoutX="275.0" layoutY="50.0" text="Login" />
-      <Label fx:id="errorLabel" layoutX="272.0" layoutY="334.0" />
+      <Button fx:id="loginButton" layoutX="263.0" layoutY="274.0" mnemonicParsing="false" onAction="#onLoginBtnClick" text="Login" />
+      <Label fx:id="errorLabel" layoutX="271.0" layoutY="333.0" minWidth="-Infinity" />
    </children>
 </AnchorPane>
