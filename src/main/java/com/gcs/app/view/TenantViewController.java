@@ -34,5 +34,9 @@ public class TenantViewController {
 		addTenantTask.valueProperty().addListener((observable, oldValue, newValue) -> {
 				message.setText(newValue);
 			});
+		
+		Thread addTenantThread = new Thread(addTenantTask);
+		addTenantThread.setDaemon(true);
+		addTenantThread.start();
 	}
 }
