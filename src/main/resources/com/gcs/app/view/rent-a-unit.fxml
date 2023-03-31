@@ -15,34 +15,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="ParentAnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gcs.app.view.RentAUnitController">
     <children>
-        <TabPane prefHeight="500.0" prefWidth="674.0">
+        <TabPane fx:id="RentAUnitTabPane" prefHeight="500.0" prefWidth="674.0">
             <tabs>
-                <Tab text="Tenants">
+                <Tab fx:id="RentAUnitTenantsTab" text="Tenants">
                     <content>
                         <SplitPane dividerPositions="0.1" orientation="VERTICAL" prefHeight="294.0" prefWidth="433.0">
                             <items>
                                 <Label prefHeight="18.0" prefWidth="212.0" text="Select Tenant" textAlignment="CENTER" />
                                 <ScrollPane prefHeight="58.0" prefWidth="285.0">
                                     <content>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
+                                        <VBox fx:id="RentAUnitTenantVBox" prefHeight="189.0" prefWidth="208.0">
                                             <children>
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
                                             </children>
                                         </VBox>
                                     </content>
@@ -57,14 +42,14 @@
                         </SplitPane>
                     </content>
                 </Tab>
-                <Tab text="Buildings">
+                <Tab fx:id="RentAUnitBuildingsTab" text="Buildings">
                     <content>
                         <SplitPane dividerPositions="0.1" orientation="VERTICAL" prefHeight="294.0" prefWidth="433.0">
                             <items>
                                 <Label prefHeight="18.0" prefWidth="212.0" text="Select Building" textAlignment="CENTER" />
                                 <ScrollPane prefHeight="58.0" prefWidth="285.0">
                                     <content>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
+                                        <VBox fx:id="RentAUnitBuildingVBox" prefHeight="200.0" prefWidth="100.0">
                                             <children>
                                                 <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
                                                 <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
@@ -91,14 +76,14 @@
                         </SplitPane>
                     </content>
                 </Tab>
-                <Tab text="Units">
+                <Tab fx:id="RentAUnitUnitsTab" text="Units">
                     <content>
                         <SplitPane dividerPositions="0.1" orientation="VERTICAL" prefHeight="294.0" prefWidth="433.0">
                             <items>
                                 <Label prefHeight="18.0" prefWidth="212.0" text="Select Unit" textAlignment="CENTER" />
                                 <ScrollPane prefHeight="58.0" prefWidth="285.0">
                                     <content>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
+                                        <VBox fx:id="RentAUnitUnitVBox" prefHeight="200.0" prefWidth="100.0">
                                             <children>
                                                 <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
                                                 <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: dddddd; -fx-border-color: ffffff;" text="Button" />
@@ -125,7 +110,7 @@
                         </SplitPane>
                     </content>
                 </Tab>
-                <Tab text="Lease">
+                <Tab fx:id="RentAUnitLeaseTab" text="Lease">
                     <content>
                         <AnchorPane prefHeight="291.0" prefWidth="382.0">
                             <children>
