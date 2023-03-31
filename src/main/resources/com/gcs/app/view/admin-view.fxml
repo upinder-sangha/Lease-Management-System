@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="533.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gcs.app.view.HelloController">
+<AnchorPane prefHeight="533.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gcs.app.view.AdminController">
     <children>
         <SplitPane dividerPositions="0.05" layoutX="4.0" layoutY="4.0" orientation="VERTICAL" prefHeight="533.0" prefWidth="847.0">
             <items>

@@ -4,10 +4,11 @@ package com.gcs.app.view;
 import com.gcs.app.tasks.AddTenantTask;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class TenantViewController {
+public class AddTenantController {
 	
 	@FXML
 	TextField tenantName;
@@ -17,6 +18,8 @@ public class TenantViewController {
 	TextField tenantEmail;
 	@FXML
 	TextField tenantPassword;
+	@FXML
+	Button submitTenantButton;
 	@FXML
 	Label message;
 	
@@ -33,10 +36,19 @@ public class TenantViewController {
 		AddTenantTask addTenantTask = new AddTenantTask(name, phone, email, password);
 		addTenantTask.valueProperty().addListener((observable, oldValue, newValue) -> {
 				message.setText(newValue);
+				tenantName.setText("");
+				tenantPhone.setText("");
+				tenantEmail.setText("");
+				tenantPassword.setText("");
 			});
 		
 		Thread addTenantThread = new Thread(addTenantTask);
 		addTenantThread.setDaemon(true);
 		addTenantThread.start();
 	}
+	
+    @FXML
+    protected void onSubmitTenantDetailsClick() {
+    	addTenant();
+    }
 }

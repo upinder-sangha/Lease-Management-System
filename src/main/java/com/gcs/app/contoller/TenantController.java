@@ -12,7 +12,7 @@ public class TenantController {
     /**
      * Add a new Tenant.
      */
-    public void addTenant(String name, String phone, String email, String password) {
+    public static void addTenant(String name, String phone, String email, String password) {
         Tenant tenant = new Tenant(name, phone, email,password);
         tenants.put(tenant.getPhoneNumber(), tenant);
     }

@@ -12,7 +12,7 @@ import java.io.IOException;
 import com.gcs.app.session.Session;
 
 
-public class HelloController {
+public class AdminController {
     @FXML
     private Label welcomeText;
     @FXML
@@ -31,9 +31,8 @@ public class HelloController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("add-a-tenant.fxml"));
         Node root = loader.load();
         currentViewPane.getChildren().setAll(root);
-        TenantViewController controller = new TenantViewController();
-        controller.addTenant();
     }
+    
     @FXML
     protected void onDisplayTenantsButtonClick() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("display-info.fxml"));
