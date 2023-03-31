@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -32,6 +31,8 @@ public class HelloController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("add-a-tenant.fxml"));
         Node root = loader.load();
         currentViewPane.getChildren().setAll(root);
+        TenantViewController controller = new TenantViewController();
+        controller.addTenant();
     }
     @FXML
     protected void onDisplayTenantsButtonClick() throws IOException {
