@@ -205,7 +205,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 						for (RentableUnit unit : units) {
 							if (unit.getLease() != null) {
 								propertyBuffer.append(++count + ".");
-								propertyBuffer.append(unit.getLease().toString());
+								propertyBuffer.append(unit.getLease().toString()+System.lineSeparator());
 								
 							}
 						}
