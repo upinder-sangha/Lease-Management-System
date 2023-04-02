@@ -36,7 +36,7 @@
                               </Text>
                      </children>
                   </AnchorPane>
-                        <Button mnemonicParsing="false" prefWidth="90.0" text="Log Out" SplitPane.resizableWithParent="false" />
+                        <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#onLogoutBtnClick" prefWidth="90.0" text="Log Out" SplitPane.resizableWithParent="false" />
                     </items>
                 </SplitPane>
                 <SplitPane dividerPositions="0.2" prefHeight="428.0" prefWidth="763.0">
@@ -428,7 +428,7 @@
                                         </GridPane>
                                     </children>
                                 </AnchorPane>
-                                <TabPane layoutY="-4.0" prefHeight="506.0" prefWidth="674.0" >
+                                <TabPane layoutY="-4.0" prefHeight="506.0" prefWidth="674.0">
                                     <tabs>
                                         <Tab text="Buildings">
                                             <content>
