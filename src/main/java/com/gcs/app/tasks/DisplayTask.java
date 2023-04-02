@@ -10,11 +10,18 @@ import com.gcs.app.contoller.TenantController;
 import com.gcs.app.model.Apartment;
 import com.gcs.app.model.Condo;
 import com.gcs.app.model.House;
+import com.gcs.app.model.Lease;
 import com.gcs.app.model.Property;
 import com.gcs.app.model.RentableUnit;
 import com.gcs.app.model.Tenant;
+import com.gcs.app.session.Session;
+import com.gcs.app.view.DisplayController;
 
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -22,14 +29,16 @@ import javafx.scene.text.TextFlow;
 public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 
 	private String operation;
+	private ArrayList<Lease> userRentedUnits;
 
-	public DisplayTask(String operation) {
+	public DisplayTask(String operation, ArrayList<Lease> leases) {
 		this.operation = operation;
+		this.userRentedUnits = leases;
 	}
 
 	@Override
 	protected ArrayList<AnchorPane> call() throws Exception {
-		StringBuffer propertyBuffer = null, unitBuffer;
+		StringBuffer propertyBuffer = null, stringBuffer;
 		ArrayList<AnchorPane> panes = new ArrayList<>();
 		AnchorPane pane;
 		Text text;
@@ -102,7 +111,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 		if ("displayRentedUnits".equalsIgnoreCase(operation)) {
 			ArrayList<Property> properties = PropertyController.getProperties();
 			int count = 0;
-			String rentedUnits = "";
+			stringBuffer = new StringBuffer();
 			if (!properties.isEmpty()) {
 				for (Property property : properties) {
 					propertyBuffer = new StringBuffer();
@@ -122,7 +131,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 							}
 						}
 					}
-					rentedUnits += propertyBuffer.toString();
+					stringBuffer.append(propertyBuffer.toString());
 				}
 				if (count == 0) {
 					text = new Text("There are no rented units");
@@ -131,7 +140,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 					pane.getChildren().add(textFlow);
 					panes.add(pane);
 				} else {
-					text = new Text(rentedUnits);
+					text = new Text(stringBuffer.toString());
 					textFlow = new TextFlow(text);
 					pane = new AnchorPane();
 					pane.getChildren().add(textFlow);
@@ -149,7 +158,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 		if ("displayVacantUnits".equalsIgnoreCase(operation)) {
 			ArrayList<Property> properties = PropertyController.getProperties();
 			int count = 0;
-			String vacantUnits = "";
+			stringBuffer = new StringBuffer();
 			if (!properties.isEmpty()) {
 				for (Property property : properties) {
 					propertyBuffer = new StringBuffer();
@@ -169,7 +178,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 							}
 						}
 					}
-					vacantUnits += propertyBuffer.toString();
+					stringBuffer.append(propertyBuffer.toString());
 				}
 				if (count == 0) {
 					text = new Text("There are no vacant units");
@@ -178,7 +187,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 					pane.getChildren().add(textFlow);
 					panes.add(pane);
 				} else {
-					text = new Text(vacantUnits);
+					text = new Text(stringBuffer.toString());
 					textFlow = new TextFlow(text);
 					pane = new AnchorPane();
 					pane.getChildren().add(textFlow);
@@ -196,7 +205,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 		if ("displayLeases".equalsIgnoreCase(operation)) {
 			ArrayList<Property> properties = PropertyController.getProperties();
 			int count = 0;
-			String leases = "";
+			stringBuffer = new StringBuffer();
 			if (!properties.isEmpty()) {
 				for (Property property : properties) {
 					propertyBuffer = new StringBuffer();
@@ -206,11 +215,11 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 							if (unit.getLease() != null) {
 								propertyBuffer.append(++count + ".");
 								propertyBuffer.append(unit.getLease().toString());
-								
+
 							}
 						}
 					}
-					leases+=propertyBuffer.toString();
+					stringBuffer.append(propertyBuffer.toString());
 				}
 				if (count == 0) {
 					text = new Text("There are no leases");
@@ -218,8 +227,8 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 					pane = new AnchorPane();
 					pane.getChildren().add(textFlow);
 					panes.add(pane);
-				}else {
-					text = new Text(leases);
+				} else {
+					text = new Text(stringBuffer.toString());
 					textFlow = new TextFlow(text);
 					pane = new AnchorPane();
 					pane.getChildren().add(textFlow);
@@ -237,7 +246,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 		if ("displayRentStatus".equalsIgnoreCase(operation)) {
 			ArrayList<Property> properties = PropertyController.getProperties();
 			int count = 0;
-			String rentStatus = "";
+			stringBuffer = new StringBuffer();
 			if (!properties.isEmpty()) {
 				for (Property property : properties) {
 					propertyBuffer = new StringBuffer();
@@ -258,7 +267,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 							}
 						}
 					}
-					rentStatus +=propertyBuffer.toString();
+					stringBuffer.append(propertyBuffer.toString());
 				}
 				if (count == 0) {
 					text = new Text("There are no rented units");
@@ -266,8 +275,8 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 					pane = new AnchorPane();
 					pane.getChildren().add(textFlow);
 					panes.add(pane);
-				}else {
-					text = new Text(rentStatus);
+				} else {
+					text = new Text(stringBuffer.toString());
 					textFlow = new TextFlow(text);
 					pane = new AnchorPane();
 					pane.getChildren().add(textFlow);
@@ -280,6 +289,98 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 				pane.getChildren().add(textFlow);
 				panes.add(pane);
 			}
+		}
+
+		if ("displayLeasesForUser".equalsIgnoreCase(operation)) {
+			String tenantPhone = Session.getInstance().getUserName();
+			ArrayList<Property> properties = PropertyController.getProperties();
+			int count = 0;
+			stringBuffer = new StringBuffer();
+			if (!properties.isEmpty()) {
+				for (Property property : properties) {
+					propertyBuffer = new StringBuffer();
+					ArrayList<RentableUnit> units = property.getUnits();
+					for (RentableUnit unit : units) {
+						Lease lease = unit.getLease();
+						if (lease != null) {
+							if (lease.getTenant().getPhoneNumber().equalsIgnoreCase(tenantPhone)) {
+								propertyBuffer.append(++count + ".");
+								propertyBuffer.append(lease.toString());
+							}
+						}
+					}
+					stringBuffer.append(propertyBuffer.toString());
+				}
+				if (count == 0) {
+					text = new Text("There are no leases");
+					textFlow = new TextFlow(text);
+					pane = new AnchorPane();
+					pane.getChildren().add(textFlow);
+					panes.add(pane);
+				} else {
+					text = new Text(stringBuffer.toString());
+					textFlow = new TextFlow(text);
+					pane = new AnchorPane();
+					pane.getChildren().add(textFlow);
+					panes.add(pane);
+				}
+			} else {
+				text = new Text("There are no properties");
+				textFlow = new TextFlow(text);
+				pane = new AnchorPane();
+				pane.getChildren().add(textFlow);
+				panes.add(pane);
+			}
+		}
+		
+		if("displayInterestedPropertiesForUser".equalsIgnoreCase(operation)) {
+			String tenantPhone = Session.getInstance().getUserName();
+			Tenant tenant = TenantController.getTenant(tenantPhone);
+			List<RentableUnit> tenantUnitList = tenant.getUnitsInterestedIn();
+			stringBuffer = new StringBuffer();
+			if(!tenantUnitList.isEmpty()) {
+	            for (RentableUnit rentableUnit: tenantUnitList){
+	                stringBuffer.append(rentableUnit.getAddress() + System.lineSeparator());
+	            }
+	            text = new Text(stringBuffer.toString());
+				textFlow = new TextFlow(text);
+				pane = new AnchorPane();
+				pane.getChildren().add(textFlow);
+				panes.add(pane);
+	    	}else {
+	    		text = new Text("You are not interested in any units");
+				textFlow = new TextFlow(text);
+				pane = new AnchorPane();
+				pane.getChildren().add(textFlow);
+				panes.add(pane);
+	    	}
+		}
+		if("displayRentedUnitsByUser".equalsIgnoreCase(operation)) {
+			int index = 0;
+			if(!this.userRentedUnits.isEmpty()) {
+				for(Lease lease : userRentedUnits) {
+					CheckBox checkBox = new CheckBox(lease.getUnitAddress());
+					checkBox.setId(String.valueOf(index++));
+					checkBox.addEventHandler(ActionEvent.ACTION, DisplayController.checkBoxCheckedHandler);
+					pane = new AnchorPane();
+					pane.getChildren().add(checkBox);
+					panes.add(pane);
+				}
+				pane = new AnchorPane();
+				Button submitBtn = new Button("Confirm and Pay");
+				submitBtn.setId("confirmAndPay");
+//				submitBtn.setAlignment(Pos.BOTTOM_CENTER);
+				submitBtn.addEventHandler(ActionEvent.ACTION, DisplayController.confirmAndPayHandler);
+				pane.getChildren().add(submitBtn);
+				panes.add(pane);
+			}
+			else {
+	    		text = new Text("All rents paid!");
+				textFlow = new TextFlow(text);
+				pane = new AnchorPane();
+				pane.getChildren().add(textFlow);
+				panes.add(pane);
+	    	}
 		}
 		return panes;
 	}
