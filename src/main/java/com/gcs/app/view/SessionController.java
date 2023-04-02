@@ -4,16 +4,11 @@ import java.io.IOException;
 
 import com.gcs.app.session.Session;
 import com.gcs.app.tasks.LoginTask;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SessionController {	
@@ -58,7 +53,7 @@ public class SessionController {
 				    else
 				    	fxmlLoader = new FXMLLoader(getClass().getResource("user-view.fxml"));
 				    try {
-				    	Scene scene = new Scene(fxmlLoader.load(), 700, 400);
+				    	Scene scene = new Scene(fxmlLoader.load(), 900, 550);
 				    	stage.setScene(scene);
 					} catch (IOException e) {
 						System.out.println(e.getMessage());
