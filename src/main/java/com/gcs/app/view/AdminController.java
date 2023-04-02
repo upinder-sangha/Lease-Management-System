@@ -3,9 +3,12 @@ package com.gcs.app.view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -21,6 +24,8 @@ public class AdminController {
     @FXML
     private Text userName;
     
+    @FXML
+	private Button logoutBtn;
     
     public void initialize() {
     	userName.setText(Session.getInstance().getUserName());
@@ -116,6 +121,15 @@ public class AdminController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("add-a-condo.fxml"));
         Node root = loader.load();
         currentViewPane.getChildren().setAll(root);
+    }
+    
+    @FXML
+    protected void onLogoutBtnClick() throws IOException {
+    	SessionController.logoutSession();
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+        Scene scene = new Scene(loader.load(), 700, 400);
+        Stage stage = (Stage) logoutBtn.getScene().getWindow();
+    	stage.setScene(scene);
     }
 
 }
