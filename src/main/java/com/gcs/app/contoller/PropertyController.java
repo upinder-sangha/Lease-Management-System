@@ -26,9 +26,10 @@ public class PropertyController {
     }
 
     public static void addProperty(String choiceOfProperty, ArrayList<String> propertyDetails){
+        Property property;
         switch (choiceOfProperty) {
             case "Building":
-                Property property = PropertyFactory.createProperty("multistoryBuilding", propertyDetails.get(0), propertyDetails.get(1), propertyDetails.get(2), propertyDetails.get(3));
+                property = PropertyFactory.createProperty("multistoryBuilding", propertyDetails.get(0), propertyDetails.get(1), propertyDetails.get(2), propertyDetails.get(3));
                 properties.add(property);
                 break;
             case "House":
@@ -37,23 +38,31 @@ public class PropertyController {
                 houseProperty.addUnit(house);
                 properties.add(houseProperty);
                 break;
-//            case "Apartment":
-//                int choice = gui.chooseBuilding(properties);
-//                property = properties.get(choice);
-//                propertyDetails = new String[]{property.getStreetNumber(), property.getStreetName(), property.getCity(), property.getPostalCode()};
-//                RentableUnit apartment = createUnit(propertyDetails, "Apartment");
-//                property.addUnit(apartment);
-//                break;
-//            case "Condo":
-//                int choice_ = gui.chooseBuilding(properties);
-//                property = properties.get(choice_);
-//                propertyDetails = new String[]{property.getStreetNumber(), property.getStreetName(), property.getCity(), property.getPostalCode()};
-//                RentableUnit condo = createUnit(propertyDetails, "condo");
-//                property.addUnit(condo);
-//                break;
+            case "Apartment":
+                property = getPropertyFromAddress(propertyDetails.get(8));
+                RentableUnit apartment = createUnit(propertyDetails,"apartment");
+                if (property != null) {
+                    property.addUnit(apartment);
+                }
+                break;
+            case "Condo":
+                property = getPropertyFromAddress(propertyDetails.get(8));
+                RentableUnit condo = createUnit(propertyDetails,"condo");
+                if (property != null) {
+                    property.addUnit(condo);
+                }
+                break;
             default:
                 System.out.println("Wrong choice!");
         }
+    }
+
+    public static Property getPropertyFromAddress(String address){
+        for (Property property: properties) {
+            if(property.getCivicAddress().equalsIgnoreCase(address))
+                return property;
+        }
+        return null;
     }
 
     public static RentableUnit createUnit(ArrayList<String> propertyDetails, String type){
@@ -64,14 +73,5 @@ public class PropertyController {
         RentableUnit unit = RentableUnitFactory.createRentableUnit(type, unitNumber, numOfBedrooms,numOfBathrooms,squareFootage, propertyDetails.get(0), propertyDetails.get(1), propertyDetails.get(2), propertyDetails.get(3));
         return unit;
     }
-//    public RentableUnit createUnit(String[] buildingDetails, String type){
-//        String[] unitDetails = gui.getUnitDetails(type);
-//        String unitNumber = unitDetails[0];
-//        int numOfBedrooms = Integer.parseInt(unitDetails[1]);
-//        int numOfBathrooms = Integer.parseInt(unitDetails[2]);
-//        double squareFootage = Double.parseDouble(unitDetails[3]);
-//        RentableUnit unit = RentableUnitFactory.createRentableUnit(type, unitNumber, numOfBedrooms,numOfBathrooms,squareFootage, buildingDetails[0], buildingDetails[1], buildingDetails[2], buildingDetails[3]);
-//        return unit;
-//    }
 
 }

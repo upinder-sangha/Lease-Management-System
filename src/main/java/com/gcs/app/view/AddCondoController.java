@@ -6,17 +6,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-public class AddApartmentController {
+public class AddCondoController {
     @FXML
-    TabPane addAnApartmentTabPane;
+    TabPane addACondoTabPane;
     @FXML
-    Tab addAnApartmentBuildingsTab;
+    Tab addACondoBuildingsTab;
     @FXML
-    VBox addAnApartmentBuildingsVBox;
+    VBox addACondoBuildingsVBox;
     @FXML
-    Tab addAnApartmentApartmentTab;
+    Tab addACondoCondoTab;
     @FXML
-    Button submitApartmentButton;
+    Button submitCondoButton;
     @FXML
     TextField unitNumber;
     @FXML
@@ -43,7 +43,7 @@ public class AddApartmentController {
         DisplayDynamicBuildingsTask displayDynamicBuildingsTask = new DisplayDynamicBuildingsTask(currentTab, this);
 
         displayDynamicBuildingsTask.valueProperty().addListener((observable,oldValue,newValue)->{
-            addAnApartmentBuildingsVBox.getChildren().addAll(newValue);
+            addACondoBuildingsVBox.getChildren().addAll(newValue);
         });
 
         Thread displayThread = new Thread(displayDynamicBuildingsTask);
@@ -53,7 +53,7 @@ public class AddApartmentController {
 
     public void onSelectingBuilding(String streetNumber, String streetName, String city, String postalCode, String civicAddress){
         //move to next tab
-        addAnApartmentTabPane.getSelectionModel().select(addAnApartmentApartmentTab);
+        addACondoTabPane.getSelectionModel().select(addACondoCondoTab);
 
         this.civicAddress = civicAddress;
         this.streetNumber = streetNumber;
@@ -64,14 +64,14 @@ public class AddApartmentController {
     }
 
     @FXML
-    protected void onSubmitApartmentDetailsClick(){
+    protected void onSubmitCondoDetailsClick(){
 
         String unitNumber = this.unitNumber.getText();
         String numberOfBedrooms = this.numberOfBedrooms.getText();
         String numberOfBathrooms = this.numberOfBathrooms.getText();
         String squareFootage = this.squareFootage.getText();
 
-        AddPropertyTask addPropertyTask = new AddPropertyTask("Apartment", streetNumber, streetName, city, postalCode,unitNumber, numberOfBedrooms,numberOfBathrooms,squareFootage, civicAddress);
+        AddPropertyTask addPropertyTask = new AddPropertyTask("Condo", streetNumber, streetName, city, postalCode,unitNumber, numberOfBedrooms,numberOfBathrooms,squareFootage, civicAddress);
         addPropertyTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             message.setText(newValue);
             this.unitNumber.setText("");
@@ -80,9 +80,9 @@ public class AddApartmentController {
             this.squareFootage.setText("");
         });
 
-        Thread addApartmentThread = new Thread(addPropertyTask);
-        addApartmentThread.setDaemon(true);
-        addApartmentThread.start();
+        Thread addCondoThread = new Thread(addPropertyTask);
+        addCondoThread.setDaemon(true);
+        addCondoThread.start();
     }
 
 }

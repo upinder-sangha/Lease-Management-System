@@ -36,7 +36,7 @@
                   </children>
               </GridPane>
               <Button fx:id="submitBuildingButton" layoutX="95.0" layoutY="167.0" mnemonicParsing="false" onAction="#onSubmitBuildingDetailsClick" text="Add" />
-            <Label fx:id="message" layoutX="107.0" layoutY="206.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="message" layoutX="107.0" layoutY="206.0"/>
           </children>
       </AnchorPane>
    </children>

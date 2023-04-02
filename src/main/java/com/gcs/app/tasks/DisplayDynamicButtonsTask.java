@@ -28,7 +28,7 @@ public class DisplayDynamicButtonsTask extends Task<ArrayList<Button>>{
 //		Text text;
 //		TextFlow textFlow;
 
-		if ("displayTenantsTab".equalsIgnoreCase(currentTab)) {
+		if ("tenantsTab".equalsIgnoreCase(currentTab)) {
 			HashMap<String, Tenant> tenants = TenantController.getTenants();
 			for (Entry<String, Tenant> tenant : tenants.entrySet()) {
 				//Button button = new Button(tenant.getValue().getName()+" ("+tenant.getValue().getPhoneNumber()+")");
@@ -37,7 +37,6 @@ public class DisplayDynamicButtonsTask extends Task<ArrayList<Button>>{
 				buttons.add(createButton(tenant.getValue().getName(),tenant.getValue().getPhoneNumber()));
 			}
 		}
-		
 		return buttons;
 	}
 	
@@ -54,13 +53,11 @@ public class DisplayDynamicButtonsTask extends Task<ArrayList<Button>>{
 		button.setPrefWidth(1.7976931348623157E308);
 		button.setStyle("x-background-color: dddddd; -fx-border-color: ffffff");
 		button.setOnAction(new EventHandler<ActionEvent>() {
-			 
 	            @Override
 	            public void handle(ActionEvent event) {
 	            	RentAUnitController.onTenantClick(button.getId());
 	            }
 	       });
 	}
-	
 	
 }

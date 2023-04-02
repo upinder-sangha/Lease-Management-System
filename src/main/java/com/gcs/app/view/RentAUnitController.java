@@ -1,13 +1,7 @@
 package com.gcs.app.view;
 
-import java.util.ArrayList;
-
 import com.gcs.app.tasks.DisplayDynamicButtonsTask;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
@@ -33,18 +27,23 @@ public class RentAUnitController {
 	
 	
 	public void initialize() {
-		displayTab("displayTenantsTab");
+		displayTab("tenantsTab");
 	}
 	
-	private void displayTab(String operation) {
-		DisplayDynamicButtonsTask displayDynamicButtonsTask = new DisplayDynamicButtonsTask(operation);
-		displayDynamicButtonsTask.valueProperty().addListener(new ChangeListener<ArrayList<Button>>() {
+	private void displayTab(String currentTab) {
+		DisplayDynamicButtonsTask displayDynamicButtonsTask = new DisplayDynamicButtonsTask(currentTab);
 
-			@Override
-			public void changed(ObservableValue<? extends ArrayList<Button>> observable, ArrayList<Button> oldValue, ArrayList<Button> newValue) {
-				RentAUnitTenantVBox.getChildren().addAll(newValue);
-			}
+		displayDynamicButtonsTask.valueProperty().addListener((observable,oldValue,newValue)->{
+			RentAUnitTenantVBox.getChildren().addAll(newValue);
 		});
+
+//		displayDynamicButtonsTask.valueProperty().addListener(new ChangeListener<ArrayList<Button>>() {
+//
+//			@Override
+//			public void changed(ObservableValue<? extends ArrayList<Button>> observable, ArrayList<Button> oldValue, ArrayList<Button> newValue) {
+//				RentAUnitTenantVBox.getChildren().addAll(newValue);
+//			}
+//		});
 		
 		Thread displayThread = new Thread(displayDynamicButtonsTask);
 		displayThread.setDaemon(true);
