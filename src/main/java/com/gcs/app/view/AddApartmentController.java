@@ -36,7 +36,9 @@ public class AddApartmentController {
 
 
     public void initialize() {
+        addAnApartmentApartmentTab.setDisable(true);
         displayTab("buildingsTab");
+
     }
 
     private void displayTab(String currentTab) {
@@ -53,6 +55,7 @@ public class AddApartmentController {
 
     public void onSelectingBuilding(String streetNumber, String streetName, String city, String postalCode, String civicAddress){
         //move to next tab
+        addAnApartmentApartmentTab.setDisable(false);
         addAnApartmentTabPane.getSelectionModel().select(addAnApartmentApartmentTab);
 
         this.civicAddress = civicAddress;

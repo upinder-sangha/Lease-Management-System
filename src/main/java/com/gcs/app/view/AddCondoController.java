@@ -36,6 +36,7 @@ public class AddCondoController {
 
 
     public void initialize() {
+        addACondoCondoTab.setDisable(true);
         displayTab("buildingsTab");
     }
 
@@ -53,6 +54,7 @@ public class AddCondoController {
 
     public void onSelectingBuilding(String streetNumber, String streetName, String city, String postalCode, String civicAddress){
         //move to next tab
+        addACondoCondoTab.setDisable(false);
         addACondoTabPane.getSelectionModel().select(addACondoCondoTab);
 
         this.civicAddress = civicAddress;
