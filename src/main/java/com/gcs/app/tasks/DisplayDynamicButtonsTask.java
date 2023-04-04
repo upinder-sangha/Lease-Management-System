@@ -25,23 +25,16 @@ public class DisplayDynamicButtonsTask extends Task<ArrayList<Button>>{
 	@Override
 	protected ArrayList<Button> call() throws Exception {
 		ArrayList<Button> buttons = new ArrayList<>();
-//		AnchorPane pane;
-//		Text text;
-//		TextFlow textFlow;
 
 		if ("displayTenantsTab".equalsIgnoreCase(currentTab)) {
 			HashMap<String, Tenant> tenants = TenantController.getTenants();
 			for (Entry<String, Tenant> tenant : tenants.entrySet()) {
-				//Button button = new Button(tenant.getValue().getName()+" ("+tenant.getValue().getPhoneNumber()+")");
-				//prefHeight="26.0" prefWidth="105.0" style="	x-background-color: dddddd; -fx-border-color: ffffff;" text="Button"
-
 				buttons.add(createTenantButton(tenant.getValue().getName(),tenant.getValue().getPhoneNumber()));
 			}
 		}
 
 		else if("displayPropertyTab".equals(currentTab)) {
 			ArrayList<Property> properties = PropertyController.getProperties();
-			System.out.println("properties size "+properties.size());
 			for(int i = 0;i<properties.size();i++) {
 				Property property = properties.get(i);
 				buttons.add(createPropertyButton(property.getCivicAddress(),property.getType(), Integer.toString(i)));

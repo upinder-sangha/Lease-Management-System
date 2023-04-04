@@ -173,11 +173,21 @@ public class RentAUnitController {
 		fetchPropertyData.valueProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
 				property = (Property) newValue;
-				System.out.println(property.getCivicAddress());
 				if(property.getType().equalsIgnoreCase("HOUSE")) {
 					unit = property.getUnits().get(0);
-					RentAUnitLeaseTab.setDisable(false);
-					RentAUnitTabPane.getSelectionModel().select(RentAUnitLeaseTab);
+					if(unit.getLease()==null) {
+						RentAUnitLeaseTab.setDisable(false);
+						RentAUnitTabPane.getSelectionModel().select(RentAUnitLeaseTab);
+					}
+					else {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Information");
+						alert.setHeaderText("Success");
+						unit.addObserverTenant(tenant);
+						tenant.addUnitInterestedIn(unit);
+						alert.setContentText("Added to your interested list of units!\n (The unit is rented right now)");
+						alert.show();
+					}
 				}
 				else {
 					RentAUnitUnitsTab.setDisable(false);
@@ -206,6 +216,8 @@ public class RentAUnitController {
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Information");
 					alert.setHeaderText("Success");
+					unit.addObserverTenant(tenant);
+					tenant.addUnitInterestedIn(unit);
 					alert.setContentText("Added to your interested list of units!\n (The unit is rented right now)");
 					alert.show();
 				}

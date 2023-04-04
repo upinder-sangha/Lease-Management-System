@@ -11,18 +11,15 @@ public class GenericSet<T extends Identity> {
 	}
 	
 	public void add(T newItem) {
-		for(T item : items) {
-			if(newItem.getID() == item.getID()) {
-				System.out.println("Existing item!! Cannot add requested item to Set");
-				break;
-			}
-			else
-				items.add(newItem);
+		if(!contains(newItem.getID())) {
+			items.add(newItem);
+		}else {
+			System.out.println("Existing item!! Cannot add requested item to Set");
 		}
-		
 	}
 	
 	public void displayAll() {
+		System.out.println(items.size());
         for (T item : items) {
             System.out.println(item.toString());
         }
@@ -63,6 +60,15 @@ public class GenericSet<T extends Identity> {
 			}
 		}
 		return true;
+	}
+	
+	private boolean contains(int id) {
+		for(T item : items) {
+			if(id == item.getID()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
