@@ -1,6 +1,8 @@
 package com.gcs.app.view;
 
 import com.gcs.app.tasks.LoadDataTask;
+import com.gcs.app.tasks.SaveDataTask;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -49,4 +51,15 @@ public class Main extends Application {
     	loadDataThread.start();
 	}
 	
+	@Override
+	public void stop(){
+	    saveData();
+	}
+
+	private void saveData() {
+		SaveDataTask saveDataTask = new SaveDataTask();
+    	Thread loadDataThread = new Thread(saveDataTask);
+    	loadDataThread.setDaemon(true);
+    	loadDataThread.start();
+	}
 }
