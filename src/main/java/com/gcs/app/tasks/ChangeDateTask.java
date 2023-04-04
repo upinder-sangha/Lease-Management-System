@@ -3,6 +3,7 @@ package com.gcs.app.tasks;
 import com.gcs.app.utility.Date;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class ChangeDateTask extends Task<String> {
 
@@ -19,10 +20,12 @@ public class ChangeDateTask extends Task<String> {
         if(!newDate.isBlank()) {
             alertMessage = Date.setDate(newDate);
             if (!(alertMessage == null)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                System.out.println(alertMessage);
+
+                Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Information");
                 alert.setHeaderText("Notifications Sent");
-                alert.setContentText(alertMessage);
+                alert.setContentText("alertMessage");
                 alert.show();
             }
         }

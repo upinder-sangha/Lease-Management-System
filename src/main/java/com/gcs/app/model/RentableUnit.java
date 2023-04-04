@@ -52,7 +52,8 @@ public abstract class RentableUnit implements RentalUnitObservable, Serializable
 	public String notifyInterestedTenants() {
 		StringBuilder messageToDisplay = new StringBuilder();
 		for(Tenant tenant: interestedTenants) {
-			messageToDisplay.append(tenant.update(this)).append("\n");
+			String str = tenant.update(this);
+			messageToDisplay.append(str).append("\n");
 		}
 		return messageToDisplay.toString();
 	}
