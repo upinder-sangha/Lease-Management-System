@@ -1,6 +1,5 @@
 package com.gcs.app.contoller;
 
-import com.gcs.app.model.Tenant;
 import com.gcs.app.session.Session;
 
 public class AccountSystemController {
