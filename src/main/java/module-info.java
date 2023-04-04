@@ -6,4 +6,5 @@ module com.gcs.app.app_project_phase_2 {
 
     opens com.gcs.app.view to javafx.fxml;
     exports com.gcs.app.view;
+    exports com.gcs.app.main;
 }
