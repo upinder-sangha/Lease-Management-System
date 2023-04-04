@@ -1,4 +1,4 @@
-package com.gcs.app.view;
+package com.gcs.app.main;
 
 import com.gcs.app.tasks.LoadDataTask;
 import com.gcs.app.tasks.SaveDataTask;
