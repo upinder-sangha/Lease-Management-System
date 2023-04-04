@@ -19,6 +19,7 @@ import com.gcs.app.view.DisplayController;
 
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -30,10 +31,14 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 
 	private String operation;
 	private ArrayList<Lease> userRentedUnits;
+	private EventHandler<ActionEvent> confirmAndPayHandler;
+	private EventHandler<ActionEvent> checkBoxCheckedHandler;
 
-	public DisplayTask(String operation, ArrayList<Lease> leases) {
+	public DisplayTask(String operation, ArrayList<Lease> leases, EventHandler<ActionEvent> confirmAndPayHandler, EventHandler<ActionEvent> checkBoxCheckedHandler) {
 		this.operation = operation;
 		this.userRentedUnits = leases;
+		this.confirmAndPayHandler = confirmAndPayHandler;
+		this.checkBoxCheckedHandler = checkBoxCheckedHandler;
 	}
 
 	@Override
@@ -356,21 +361,25 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 		}
 		if("displayRentedUnitsByUser".equalsIgnoreCase(operation)) {
 			int index = 0;
+			List<CheckBox> checkBoxList = new ArrayList<>();
+			AnchorPane checkBoxPane = new AnchorPane();
+			checkBoxPane.setId("checkBoxPane");
 			if(!this.userRentedUnits.isEmpty()) {
 				for(Lease lease : userRentedUnits) {
 					CheckBox checkBox = new CheckBox(lease.getUnitAddress());
 					checkBox.setId(String.valueOf(index++));
-					checkBox.addEventHandler(ActionEvent.ACTION, DisplayController.checkBoxCheckedHandler);
-					pane = new AnchorPane();
-					pane.getChildren().add(checkBox);
-					panes.add(pane);
+					checkBox.addEventHandler(ActionEvent.ACTION, this.checkBoxCheckedHandler);
+					checkBoxList.add(checkBox);
 				}
 				pane = new AnchorPane();
+				pane.setId("buttonPane");
 				Button submitBtn = new Button("Confirm and Pay");
 				submitBtn.setId("confirmAndPay");
 //				submitBtn.setAlignment(Pos.BOTTOM_CENTER);
-				submitBtn.addEventHandler(ActionEvent.ACTION, DisplayController.confirmAndPayHandler);
+				submitBtn.addEventHandler(ActionEvent.ACTION, this.confirmAndPayHandler);
 				pane.getChildren().add(submitBtn);
+				checkBoxPane.getChildren().addAll(checkBoxList);
+				panes.add(checkBoxPane);
 				panes.add(pane);
 			}
 			else {

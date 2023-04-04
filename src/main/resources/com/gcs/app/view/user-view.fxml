@@ -15,7 +15,7 @@
                   <Label fx:id="userName" layoutX="27.0" layoutY="9.0" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="729.0">
+          <AnchorPane fx:id="userAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="729.0">
                <children>
                   <SplitPane dividerPositions="0.20839064649243466" prefHeight="479.0" prefWidth="729.0">
                     <items>

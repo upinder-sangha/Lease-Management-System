@@ -1,19 +1,18 @@
 package com.gcs.app.view;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-import com.gcs.app.contoller.TenantController;
 import com.gcs.app.model.Lease;
-import com.gcs.app.model.Tenant;
-import com.gcs.app.session.Session;
 import com.gcs.app.tasks.DisplayTask;
-import com.gcs.app.tasks.ExistingTenantTask;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -21,6 +20,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -53,7 +53,7 @@ public class DisplayController {
 	}
 	
 	public void setUnitsForUser(ArrayList<Lease> leases) {
-		this.leases = leases;
+		DisplayController.leases = leases;
 		
 	}
 	
@@ -62,7 +62,7 @@ public class DisplayController {
 		leaseIndexes = new ArrayList<>();
 	}
 	
-	public static EventHandler<ActionEvent> confirmAndPayHandler = new EventHandler<ActionEvent>() {
+	public EventHandler<ActionEvent> confirmAndPayHandler = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
             if(!leaseIndexes.isEmpty()) {            	
             	for(String index : leaseIndexes) {
@@ -72,12 +72,27 @@ public class DisplayController {
     			alert.setTitle("Success");
     			alert.setHeaderText("Rent");
     			alert.setContentText("Rent Payment Success");
-    			alert.show();
+    			Optional<ButtonType> result = alert.showAndWait();
+    			ButtonType button = result.orElse(ButtonType.CANCEL);
+    			List<CheckBox> checkBoxesToRemove = new ArrayList<>();
+    			if (button == ButtonType.OK) {
+    				AnchorPane checkBoxPane = (AnchorPane) displayBox.getChildren().get(0);
+    				for(Node checkBoxes : checkBoxPane.getChildren()) {
+		    			checkBoxesToRemove.add((CheckBox)checkBoxes);
+		    		}
+    				checkBoxPane.getChildren().removeAll(checkBoxesToRemove);
+    				
+    				if(checkBoxPane.getChildren().size() == 0) {
+    					displayBox.getChildren().clear();
+    				}
+    			} else {
+    			    System.out.println("canceled");
+    			}
             }   
         };
     };
 		
-    public static EventHandler<ActionEvent> checkBoxCheckedHandler = new EventHandler<ActionEvent>() {
+    public EventHandler<ActionEvent> checkBoxCheckedHandler = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
         	if(((CheckBox)e.getSource()).isSelected()) {
         		String leaseIndex = ((CheckBox)e.getSource()).getId();
@@ -93,7 +108,7 @@ public class DisplayController {
     
 	public void display() {
 		initialize();
-		DisplayTask displayTask = new DisplayTask(operation,leases);
+		DisplayTask displayTask = new DisplayTask(operation,leases,confirmAndPayHandler,checkBoxCheckedHandler);
 		if("displayTenants".equalsIgnoreCase(operation)) {
 			headingLabel.setText("Tenants");
 		}else if("displayProperties".equalsIgnoreCase(operation)) {
