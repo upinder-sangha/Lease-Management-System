@@ -10,6 +10,6 @@ public interface RentalUnitObservable {
 
 	public void addObserverTenant(Tenant t);
 	public void removeObserverTenant(Tenant t);
-	public void notifyInterestedTenants();
+	public String notifyInterestedTenants();
 	
 }

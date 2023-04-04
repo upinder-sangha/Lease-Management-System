@@ -49,10 +49,12 @@ public abstract class RentableUnit implements RentalUnitObservable, Serializable
 	public void removeObserverTenant(Tenant t) {
 		interestedTenants.remove(t);
 	}
-	public void notifyInterestedTenants() {
+	public String notifyInterestedTenants() {
+		StringBuilder messageToDisplay = new StringBuilder();
 		for(Tenant tenant: interestedTenants) {
-			tenant.update(this);
+			messageToDisplay.append(tenant.update(this)).append("\n");
 		}
+		return messageToDisplay.toString();
 	}
 
     public void rentUnit(Tenant tenant, double rent, String startsOn, String endsOn){
@@ -68,9 +70,9 @@ public abstract class RentableUnit implements RentalUnitObservable, Serializable
         return lease;
     }
 
-	public void endLease() {
+	public String endLease() {
 		this.lease = null;
-        this.notifyInterestedTenants();
+        return this.notifyInterestedTenants();
 	}
 
 	public int getNumberOfBedrooms() {

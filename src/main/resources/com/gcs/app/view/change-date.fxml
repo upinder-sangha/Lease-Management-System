@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gcs.app.view.ChangeDateController">
+    <children>
+      <AnchorPane prefHeight="291.0" prefWidth="382.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="14.0" prefHeight="18.0" prefWidth="200.0" text="Enter new Date" textAlignment="CENTER" />
+            <Button fx:id="setDateButton" layoutX="148.0" layoutY="107.0" mnemonicParsing="false" onAction="#onSetDateButtonClicked" text="Do Action" />
+            <GridPane layoutX="70.0" layoutY="58.0" prefHeight="34.0" prefWidth="242.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.8000244140625" minWidth="10.0" prefWidth="97.5999755859375" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.39999999999998" minWidth="10.0" prefWidth="184.80002441406248" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="33.6" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="New Date" />
+                  <DatePicker fx:id="newDate" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <Label fx:id="setDateLabel" layoutX="31.0" layoutY="166.0" prefHeight="20.0" prefWidth="271.0" />
+         </children>
+      </AnchorPane>
+    </children>
+
+</AnchorPane>

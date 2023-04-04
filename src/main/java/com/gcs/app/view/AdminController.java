@@ -1,5 +1,6 @@
 package com.gcs.app.view;
 
+import com.gcs.app.session.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,8 +12,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import com.gcs.app.session.Session;
 
 
 public class AdminController {
@@ -119,6 +118,12 @@ public class AdminController {
     @FXML
     protected void onAddACondoButtonClick() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("add-a-condo.fxml"));
+        Node root = loader.load();
+        currentViewPane.getChildren().setAll(root);
+    }
+    @FXML
+    protected void onChangeDateButtonClick() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("change-date.fxml"));
         Node root = loader.load();
         currentViewPane.getChildren().setAll(root);
     }

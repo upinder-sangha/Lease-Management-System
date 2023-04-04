@@ -59,7 +59,7 @@
                                         <MenuItem fx:id="addAnApartmentButton" mnemonicParsing="false" onAction="#onAddAnApartmentButtonClick" text="Apartment" />
                                     </items>
                                 </MenuButton>
-                                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="184.0" text="Change Date" />
+                                <Button fx:id="changeDateButton" mnemonicParsing="false" onAction="#onChangeDateButtonClick" prefHeight="26.0" prefWidth="184.0" text="Change Date" />
                             </children>
                         </VBox>
                         <AnchorPane id="Add a Tenant Menu" fx:id="currentViewPane" prefHeight="410.0" prefWidth="557.0" scaleShape="false" SplitPane.resizableWithParent="false">
