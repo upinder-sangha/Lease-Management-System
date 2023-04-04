@@ -1,5 +1,6 @@
 package com.gcs.app.main;
 
+import com.gcs.app.contoller.MainController;
 import com.gcs.app.tasks.LoadDataTask;
 import com.gcs.app.tasks.SaveDataTask;
 
@@ -53,13 +54,8 @@ public class Main extends Application {
 	
 	@Override
 	public void stop(){
-	    saveData();
-	}
-
-	private void saveData() {
-		SaveDataTask saveDataTask = new SaveDataTask();
-    	Thread loadDataThread = new Thread(saveDataTask);
-    	loadDataThread.setDaemon(true);
-    	loadDataThread.start();
+		MainController mainController = new MainController();
+		mainController.saveAndExit();
+	    
 	}
 }

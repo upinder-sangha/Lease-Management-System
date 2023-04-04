@@ -19,6 +19,7 @@ import com.gcs.app.session.Session;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
@@ -371,6 +372,7 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 				}
 				pane = new AnchorPane();
 				pane.setId("buttonPane");
+				pane.setPadding(new Insets(5));
 				Button submitBtn = new Button("Confirm and Pay");
 				submitBtn.setId("confirmAndPay");
 //				submitBtn.setAlignment(Pos.BOTTOM_CENTER);
