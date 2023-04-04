@@ -15,12 +15,10 @@ import com.gcs.app.model.Property;
 import com.gcs.app.model.RentableUnit;
 import com.gcs.app.model.Tenant;
 import com.gcs.app.session.Session;
-import com.gcs.app.view.DisplayController;
 
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;

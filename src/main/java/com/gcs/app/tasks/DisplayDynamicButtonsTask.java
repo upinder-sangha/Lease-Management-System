@@ -24,7 +24,6 @@ public class DisplayDynamicButtonsTask extends Task<ArrayList<Button>>{
 
 	@Override
 	protected ArrayList<Button> call() throws Exception {
-		StringBuffer propertyBuffer = null, unitBuffer;
 		ArrayList<Button> buttons = new ArrayList<>();
 //		AnchorPane pane;
 //		Text text;
