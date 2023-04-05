@@ -2,7 +2,6 @@ package com.gcs.app.main;
 
 import com.gcs.app.contoller.MainController;
 import com.gcs.app.tasks.LoadDataTask;
-import com.gcs.app.tasks.SaveDataTask;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
