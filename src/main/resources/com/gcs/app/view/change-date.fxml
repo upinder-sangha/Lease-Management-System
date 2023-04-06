@@ -27,7 +27,7 @@
                   <DatePicker fx:id="newDate" GridPane.columnIndex="1" />
                </children>
             </GridPane>
-            <Label fx:id="setDateLabel" layoutX="31.0" layoutY="166.0" prefHeight="20.0" prefWidth="271.0" />
+            <Label fx:id="setDateLabel" layoutX="31.0" layoutY="166.0" />
          </children>
       </AnchorPane>
     </children>
