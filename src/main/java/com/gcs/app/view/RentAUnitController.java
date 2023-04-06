@@ -82,6 +82,7 @@ public class RentAUnitController {
 	}
 
 	private void displayPropertyTab() {
+		RentAUnitBuildingVBox.getChildren().clear();
 		DisplayDynamicButtonsTask displayDynamicButtonsTask = new DisplayDynamicButtonsTask("displayPropertyTab", null);
 		displayDynamicButtonsTask.valueProperty().addListener(new ChangeListener<ArrayList<Button>>() {
 
@@ -99,6 +100,7 @@ public class RentAUnitController {
 	}
 
 	private void displayUnitTab() {
+		RentAUnitUnitVBox.getChildren().clear();
 		DisplayDynamicButtonsTask displayDynamicButtonsTask = new DisplayDynamicButtonsTask("displayUnitTab", property );
 		displayDynamicButtonsTask.valueProperty().addListener(new ChangeListener<ArrayList<Button>>() {
 
