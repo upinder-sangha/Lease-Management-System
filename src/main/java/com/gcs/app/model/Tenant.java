@@ -51,17 +51,25 @@ public class Tenant implements TenantObserver, Serializable {
 	}
 	
 	public void addUnitInterestedIn(RentableUnit unit) {
-		if(!unitsInterestedIn.contains(unit))
+		if(contains(unit))
 			unitsInterestedIn.add(unit);
 	}
 	
+	private boolean contains(RentableUnit newUnit) {
+		for(RentableUnit unit : unitsInterestedIn) {
+			if(unit.getAddress().equalsIgnoreCase(newUnit.getAddress())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public void removeUnitInterestedIn(RentableUnit unit) {
 		unitsInterestedIn.remove(unit);
 	}
     
 	@Override
 	public String update(RentableUnit unit) {
-		System.out.println(unit.getAddress() + " is open for leasing: "+this.emailId);
         return unit.getAddress() + " is open for leasing: "+this.emailId;
 	}
 	

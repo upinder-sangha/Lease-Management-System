@@ -43,7 +43,7 @@ public abstract class RentableUnit implements RentalUnitObservable, Serializable
     }
     
 	public void addObserverTenant(Tenant t) {
-		if(!interestedTenants.contains(t))
+		if(contains(t))
 			interestedTenants.add(t);
 	}
 	public void removeObserverTenant(Tenant t) {
@@ -100,4 +100,12 @@ public abstract class RentableUnit implements RentalUnitObservable, Serializable
 		this.squareFootage = squareFootage;
 	}
 
+	public boolean contains(Tenant newTenant) {
+		for(Tenant tenant : interestedTenants) {
+			if(tenant.getPhoneNumber() == newTenant.getPhoneNumber()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
