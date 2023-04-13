@@ -33,13 +33,19 @@ public class ChangeDateController {
 
         ChangeDateTask changeDateTask = new ChangeDateTask(newDate);
         changeDateTask.valueProperty().addListener((observable,oldValue,newValue) -> {
+            if(newValue.equalsIgnoreCase("Please select a date!"))
+                setDateLabel.setText("Please select a date!");
+            else{
             setDateLabel.setText("Date changed successfully");
-            System.out.println(Thread.currentThread().getId());
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setHeaderText("Notifications Sent");
-            alert.setContentText(newValue);
-            alert.show();
+//            System.out.println(Thread.currentThread().getId());
+            if(!newValue.equalsIgnoreCase("")) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Notifications Sent");
+                alert.setContentText(newValue);
+                alert.show();
+            }
+            }
         });
         Thread changeDateThread = new Thread(changeDateTask);
         changeDateThread.setDaemon(true);

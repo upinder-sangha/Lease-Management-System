@@ -20,8 +20,10 @@ public class ChangeDateTask extends Task<String> {
 			if (!(alertMessage == null)) {
 				return alertMessage;
 			}
+			else return "";
 		}
-		return "Please select a date!";
+		else
+			return "Please select a date!";
 
 	}
 }
