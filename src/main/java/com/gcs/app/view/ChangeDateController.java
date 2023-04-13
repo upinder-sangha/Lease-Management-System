@@ -33,12 +33,12 @@ public class ChangeDateController {
 
         ChangeDateTask changeDateTask = new ChangeDateTask(newDate);
         changeDateTask.valueProperty().addListener((observable,oldValue,newValue) -> {
-            setDateLabel.setText(newValue);
+            setDateLabel.setText("Date changed successfully");
             System.out.println(Thread.currentThread().getId());
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText("Notifications Sent");
-            alert.setContentText("alertMessage");
+            alert.setContentText(newValue);
             alert.show();
         });
         Thread changeDateThread = new Thread(changeDateTask);
