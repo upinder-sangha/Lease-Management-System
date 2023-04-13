@@ -14,12 +14,12 @@ public class GenericSet<T extends Identity> {
 		if(!contains(newItem.getID())) {
 			items.add(newItem);
 		}else {
-			System.out.println("Existing item!! Cannot add requested item to Set");
+			System.out.println("Cannot add requested item to Set: Existing item!!");
 		}
 	}
 	
 	public void displayAll() {
-		System.out.println(items.size());
+		System.out.println("Size of the Set: "+items.size());
         for (T item : items) {
             System.out.println(item.toString());
         }
