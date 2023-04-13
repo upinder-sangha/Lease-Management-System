@@ -264,9 +264,9 @@ public class DisplayTask extends Task<ArrayList<AnchorPane>> {
 								else if (unit instanceof House)
 									propertyBuffer.append(++count + ". " + unit.getAddress() + " (House)");
 								if (unit.getLease().isMonthlyRentPaid())
-									propertyBuffer.append(" (Paid)");
+									propertyBuffer.append(" (Paid)" +System.lineSeparator());
 								else
-									propertyBuffer.append(" (Not Paid)");
+									propertyBuffer.append(" (Not Paid)"+System.lineSeparator());
 							}
 						}
 					}
