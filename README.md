@@ -1,0 +1,1 @@
+avaFX-based desktop application designed to streamline property management. It allows landlords and property managers to efficiently handle tenant information, lease agreements, rent payments, and property details. Built using design patterns for maintainability, the system ensures a structured and scalable approach to lease management.
